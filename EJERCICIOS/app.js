@@ -36,13 +36,11 @@ console.log(character);
 //*Muestralos por consola de esta forma: 
 //*'Soy Jon Snow, tengo 24 años y me gustan los lobos.'
 
-let firstName = 'Jon';
-let lastName = 'Snow';
+let firstName = "JON";
+let lastName = "SNOW";
 let age = 24;
-
-let textoEntero = 'soy ${firstName} ${lastName}, tengo ${age} años y me gustan los lobos.';
-
-console.log(textoEntero);
+let texto = `SOY ${firstName} ${lastName}, TENGO ${age} AÑOS Y ME GUSTAN LOS LOBOS.`
+console.log(texto);
 
 //*1.3 Dado el siguiente javascript, imprime con un console.log la suma del precio de
 //*ambos juguetes
