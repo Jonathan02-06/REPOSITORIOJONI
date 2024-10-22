@@ -122,9 +122,70 @@ const cifras = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
  let pares = cifras.filter(e => e % 2 == 0)
  console.log (pares);
 
- ///ejemplo JSON
 
- let dataJSON = `{ "nombre" : "noelia" : "hobby" : "nadar" , "numeros" : [ 0, 13 ]}`
-console.log(dataJSON);
 
+//*callback
+
+function acciondepersona (callback){
+   const nombre = 'Joni'
+   callback(nombre)
+}
+function despedir(nombre) {
+   console.log(`soy ${nombre} estoy cansado,adios`)
+}
+acciondepersona(despedir)
+
+
+
+// Desarrollador una calculadora super simple
+
+function multiplicar(num1, num2) {
+   return num1 * num2
+}
+console.log(multiplicar);
+
+// Añadir metodos de operaciones a el objeto calculadora
+
+const calculadora = {
+   sumar: function (num1, num2) {
+   }, restar: function (num1, num2) {
+
+   }, dividir: function (num1, num2) {
+
+   }, multiplicar: function (num1, num2) {
+         
+   }, sumarcifrasdecimales: function (num1, num2) {
+
+   }
+
+}  
+
+
+
+
+
+
+
+
+const inventario = [
+    { nombre: "Camisa", categoria: "Ropa", cantidad: 10, precio: 20 },
+    { nombre: "Pantalón", categoria: "Ropa", cantidad: 5, precio: 30 },
+    { nombre: "Zapatillas", categoria: "Calzado", cantidad: 8, precio: 50 },
+    { nombre: "Sombrero", categoria: "Accesorios", cantidad: 15, precio: 10 }
+  ];
+// Función 1: Añadir un Producto
+
+function agregarProducto(nombre, categoria, cantidad, precio) {
+   const nuevoproducto = {nombre, categoria, cantidad, precio}
+   inventario.push(nuevoproducto)
+   console.log(`se ha añadido el producto ${nombre}`);
+   
+
+}
+
+
+
+
+// Función 2: Buscar un Producto
+// Función 3: Actualizar Stock
 
