@@ -1,0 +1,147 @@
+body {
+  font-family: 'Poppins', Arial, sans-serif;
+  background: linear-gradient(135deg, #dfefff, #b3d4fc); /* Fondo azul celeste suave */
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  color: #444;
+  position: relative; /* Necesario para usar pseudo-elementos */
+  overflow-x: hidden; /* Evita desplazamiento horizontal si las imágenes sobresalen */
+}
+
+body::before,
+body::after {
+  content: ''; /* Contenido vacío para las imágenes */
+  position: absolute;
+  top: 0;
+  width: 300px; /* Tamaño de las imágenes */
+  height: 100vh; /* Abarca todo el alto de la pantalla */
+  background-size: contain; /* Escala las imágenes sin recortarlas */
+  background-repeat: repeat;
+  background-position: center center;
+  opacity: 0.2; /* Translucidez para no distraer demasiado */
+  z-index: 0; /* Coloca las imágenes detrás del contenido */
+}
+
+body::before {
+  left: 0; /* Imagen en el lado izquierdo */
+  background-image: url('https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png'); /* URL de un Pokémon */
+}
+
+body::after {
+  right: 0; /* Imagen en el lado derecho */
+  background-image: url('https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png'); /* URL de otro Pokémon */
+}
+
+#app {
+  max-width: 1000px;
+  width: 100%;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9); /* Fondo semitransparente para el contenido */
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  position: relative; /* Asegura que el contenido esté sobre las imágenes */
+  z-index: 1; /* Coloca el contenido por encima del fondo */
+}
+header {
+  text-align: center;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid #0073e6; /* Línea inferior azul */
+}
+
+#search, #type-filter {
+  padding: 10px;
+  width: 250px;
+  font-size: 16px;
+  border: 2px solid #ddd; /* Borde inicial gris claro */
+  border-radius: 5px;
+  transition: border-color 0.3s, box-shadow 0.3s; /* Transiciones suaves */
+}
+
+#search:focus, #type-filter:focus, 
+#search:hover, #type-filter:hover {
+  border-color: #0073e6; /* Cambia el borde a azul */
+  box-shadow: 0 0 10px rgba(0, 115, 230, 0.3); /* Efecto de brillo alrededor */
+  outline: none; /* Elimina el contorno por defecto */
+}
+
+#search {
+  background-color: #ffffff; /* Fondo blanco limpio */
+}
+
+#type-filter {
+  background: linear-gradient(135deg, #ffffff, #f0f8ff); /* Fondo sutil con azul claro */
+  cursor: pointer; /* Cambia el cursor para indicar interactividad */
+}
+#type-filter:hover {
+  background-color: #0073e6;
+  color: white;
+  box-shadow: 0 0 10px rgba(0, 115, 230, 0.4);
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Ajuste flexible */
+  gap: 20px;
+}
+
+.card {
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  background: linear-gradient(135deg, #ffffff, #f9f9ff); /* Fondo con sutil gradiente */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  overflow: hidden;
+}
+
+.card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  transition: transform 0.4s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.05); /* Elevación dinámica */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* Mayor profundidad */
+}
+
+.card:hover img {
+  transform: scale(1.1); /* Efecto de zoom en la imagen */
+}
+
+#pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.pagination-button {
+  padding: 12px 18px;
+  margin: 5px;
+  cursor: pointer;
+  border: none;
+  background: linear-gradient(135deg, #0073e6, #005bb5);
+  color: rgb(234, 233, 237);
+  border-radius: 25px;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s, transform 0.2s;
+}
+
+.pagination-button:hover {
+  background: linear-gradient(135deg, #005bb5, #003f8c);
+  transform: scale(1.1); /* Aumenta ligeramente el tamaño */
+}
+
+.pagination-button.active {
+  background: linear-gradient(135deg, #ff7e5f, #feb47b); /* Color especial para el activo */
+  box-shadow: 0 4px 10px rgba(255, 126, 95, 0.5);
+}
