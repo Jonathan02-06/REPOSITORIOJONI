@@ -17,7 +17,7 @@ body::after {
   width: 300px; /* Tamaño de las imágenes */
   height: 100vh; /* Abarca todo el alto de la pantalla */
   background-size: contain; /* Escala las imágenes sin recortarlas */
-  background-repeat: repeat;
+  background-repeat: no-repeat; /* No repite las imágenes */
   background-position: center center;
   opacity: 0.2; /* Translucidez para no distraer demasiado */
   z-index: 0; /* Coloca las imágenes detrás del contenido */
@@ -25,12 +25,12 @@ body::after {
 
 body::before {
   left: 0; /* Imagen en el lado izquierdo */
-  background-image: url('https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png'); /* URL de un Pokémon */
+  background-image: url('https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png'); /* Bulbasaur */
 }
 
 body::after {
   right: 0; /* Imagen en el lado derecho */
-  background-image: url('https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png'); /* URL de otro Pokémon */
+  background-image: url('https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png'); /* Pikachu */
 }
 
 #app {
@@ -43,6 +43,7 @@ body::after {
   position: relative; /* Asegura que el contenido esté sobre las imágenes */
   z-index: 1; /* Coloca el contenido por encima del fondo */
 }
+
 header {
   text-align: center;
   margin-bottom: 20px;
@@ -52,6 +53,13 @@ header {
   gap: 20px;
   padding-bottom: 10px;
   border-bottom: 3px solid #0073e6; /* Línea inferior azul */
+}
+
+.pokedex-title img {
+  width: 60%;
+  max-width: 400px;
+  height: auto;
+  margin-bottom: 20px;
 }
 
 #search, #type-filter {
@@ -78,6 +86,7 @@ header {
   background: linear-gradient(135deg, #ffffff, #f0f8ff); /* Fondo sutil con azul claro */
   cursor: pointer; /* Cambia el cursor para indicar interactividad */
 }
+
 #type-filter:hover {
   background-color: #0073e6;
   color: white;
