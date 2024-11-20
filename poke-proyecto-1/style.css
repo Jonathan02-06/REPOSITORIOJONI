@@ -1,6 +1,6 @@
 body {
   font-family: 'Poppins', Arial, sans-serif;
-  background: linear-gradient(135deg, #dfefff, #b3d4fc); /* Fondo azul celeste suave */
+  background: linear-gradient(135deg, #dfefff, #b3d4fc); /* Fondo azul celeste */
   margin: 0;
   display: flex;
   justify-content: center;
@@ -9,7 +9,7 @@ body {
   overflow-x: hidden; /* Evita desplazamiento horizontal si las imágenes sobresalen */
 }
 
-body::before,
+body::before,en el lado
 body::after {
   content: ''; /* Contenido vacío para las imágenes */
   position: absolute;
@@ -17,19 +17,19 @@ body::after {
   width: 300px; /* Tamaño de las imágenes */
   height: 100vh; /* Abarca todo el alto de la pantalla */
   background-size: contain; /* Escala las imágenes sin recortarlas */
-  background-repeat: no-repeat; /* No repite las imágenes */
+  background-repeat: repeat; /* repite las imágenes */
   background-position: center center;
-  opacity: 0.2; /* Translucidez para no distraer demasiado */
+  opacity: 0.2; /* Translucidez  */
   z-index: 0; /* Coloca las imágenes detrás del contenido */
 }
 
 body::before {
-  left: 0; /* Imagen en el lado izquierdo */
+  left: 0; /* Imagen  izquierdo */
   background-image: url('https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png'); /* Bulbasaur */
 }
 
 body::after {
-  right: 0; /* Imagen en el lado derecho */
+  right: 0; /* Imagen lado derecho */
   background-image: url('https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png'); /* Pikachu */
 }
 
@@ -37,10 +37,10 @@ body::after {
   max-width: 1000px;
   width: 100%;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.9); /* Fondo semitransparente para el contenido */
+  background: rgba(255, 255, 255, 0.9); /* Fondo semitransparente */
   border-radius: 15px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  position: relative; /* Asegura que el contenido esté sobre las imágenes */
+  position: relative; /*  contenido esté sobre las imágenes */
   z-index: 1; /* Coloca el contenido por encima del fondo */
 }
 
@@ -79,11 +79,11 @@ header {
 }
 
 #search {
-  background-color: #ffffff; /* Fondo blanco limpio */
+  background-color: #ffffff; /* Fondo blanco */
 }
 
 #type-filter {
-  background: linear-gradient(135deg, #ffffff, #f0f8ff); /* Fondo sutil con azul claro */
+  background: linear-gradient(135deg, #ffffff, #f0f8ff); /* Fondo sutil azul claro */
   cursor: pointer; /* Cambia el cursor para indicar interactividad */
 }
 
