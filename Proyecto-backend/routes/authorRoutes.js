@@ -1,8 +1,11 @@
-const express = require("express");
-const { getAuthors } = require("../controllers/authorController");
-const authMiddleware = require("../middleware/authMiddleware");
+const express = require('express');
 const router = express.Router();
+const authorController = require('../controllers/authorController');
 
-router.get("/", authMiddleware, getAuthors);
+// Ruta para crear un autor
+router.post('/', authorController.createAuthor);
+
+// Ruta para obtener todos los autores
+router.get('/', authorController.getAllAuthors);
 
 module.exports = router;

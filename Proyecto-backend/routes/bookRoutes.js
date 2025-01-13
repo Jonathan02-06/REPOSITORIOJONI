@@ -1,8 +1,11 @@
-const express = require("express");
-const { getBooks } = require("../controllers/bookController");
-const authMiddleware = require("../middleware/authMiddleware");
+const express = require('express');
 const router = express.Router();
+const bookController = require('../controllers/bookController');
 
-router.get("/", authMiddleware, getBooks);
+// Ruta para crear un libro
+router.post('/', bookController.createBook);
+
+// Ruta para obtener todos los libros
+router.get('/', bookController.getAllBooks);
 
 module.exports = router;
