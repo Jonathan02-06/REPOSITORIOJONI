@@ -1,14 +1,26 @@
 const jwt = require("jsonwebtoken");
 
-module.exports = (req, res, next) => {
-  const token = req.header("Authorization");
-  if (!token) return res.status(401).json({ error: "Acceso denegado" });
+const authMiddleware = (req, res, next) => {
+  // Obtener el token del header Authorization: 'Bearer <token>'
+  const authHeader = req.headers.authorization;
+  if (!authHeader) {
+    return res.status(401).json({ message: "No se proporcionó un token." });
+  }
+
+  const token = authHeader.split(" ")[1];
+  if (!token) {
+    return res.status(401).json({ message: "Formato de token inválido." });
+  }
 
   try {
-    const verified = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = verified;
+    // Verificamos el token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    // Añadimos el userId decodificado al objeto req para usarlo más adelante
+    req.userId = decoded.userId;
     next();
-  } catch (err) {
-    res.status(400).json({ error: "Token no válido" });
+  } catch (error) {
+    return res.status(401).json({ message: "Token inválido o expirado." });
   }
 };
+
+module.exports = authMiddleware;

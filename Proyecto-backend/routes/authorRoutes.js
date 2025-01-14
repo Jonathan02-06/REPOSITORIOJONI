@@ -1,11 +1,22 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const authorController = require('../controllers/authorController');
 
-// Ruta para crear un autor
-router.post('/', authorController.createAuthor);
+const {
+  createAuthor,
+  getAllAuthors,
+  getAuthorById,
+  updateAuthor,
+  deleteAuthor
+} = require("../controllers/authorController");
 
-// Ruta para obtener todos los autores
-router.get('/', authorController.getAllAuthors);
+// Middleware de autenticación
+const authMiddleware = require("../middleware/authMiddleware");
+
+// Rutas protegidas para CRUD de autores
+router.post("/", authMiddleware, createAuthor);
+router.get("/", authMiddleware, getAllAuthors);
+router.get("/:id", authMiddleware, getAuthorById);
+router.put("/:id", authMiddleware, updateAuthor);
+router.delete("/:id", authMiddleware, deleteAuthor);
 
 module.exports = router;
