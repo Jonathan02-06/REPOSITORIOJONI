@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 function useLocalStorage(key, initialValue) {
-  // Inicializa el estado leyendo de localStorage, si existe
+  
   const [storedValue, setStoredValue] = useState(() => {
     try {
       const item = window.localStorage.getItem(key);

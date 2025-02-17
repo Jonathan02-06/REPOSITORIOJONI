@@ -4,7 +4,7 @@ import useLocalStorage from "../hooks/useLocalStorage";
 import "./Users.css";
 
 const Users = () => {
-  // Usamos useLocalStorage con la clave "users" y un array vacío como valor inicial
+  
   const [users, setUsers] = useLocalStorage("users", []);
   const [form, setForm] = useState({ id: null, name: "", email: "" });
   const [isEditing, setIsEditing] = useState(false);
