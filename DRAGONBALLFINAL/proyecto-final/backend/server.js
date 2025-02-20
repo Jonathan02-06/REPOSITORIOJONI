@@ -12,7 +12,7 @@ const SECRET_KEY = process.env.SECRET_KEY || "mi_clave_secreta";
 mongoose
   .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
+    useUnifiedTopology: true
   })
   .then(() => console.log("Conectado a MongoDB"))
   .catch((err) => console.error("Error conectando a MongoDB:", err));
@@ -20,18 +20,17 @@ mongoose
 app.use(express.json());
 app.use(cors());
 
-
+// Importar el modelo de usuario
 const User = require("./models/User");
 
-
+// Ruta raíz para comprobar que el backend está funcionando
 app.get("/", (req, res) => {
   res.send("Backend is running");
 });
 
-
+// Endpoint de registro de usuario (normalizando el username)
 app.post("/api/auth/register", async (req, res) => {
   let { username, password, email } = req.body;
-  
   username = username.toLowerCase();
   try {
     const existingUser = await User.findOne({ $or: [{ username }, { email }] });
@@ -47,7 +46,7 @@ app.post("/api/auth/register", async (req, res) => {
   }
 });
 
-
+// Endpoint de login (normalizando el username)
 app.post("/api/auth/login", async (req, res) => {
   let { username, password } = req.body;
   username = username.toLowerCase();
@@ -65,7 +64,7 @@ app.post("/api/auth/login", async (req, res) => {
   }
 });
 
-
+// Endpoint para obtener la lista de usuarios (excluyendo contraseñas)
 app.get("/api/users", async (req, res) => {
   try {
     const users = await User.find({}).select("-password");
@@ -76,7 +75,7 @@ app.get("/api/users", async (req, res) => {
   }
 });
 
-
+// Endpoint DELETE para eliminar un usuario por ID
 app.delete("/api/users/:id", async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(req.params.id);
