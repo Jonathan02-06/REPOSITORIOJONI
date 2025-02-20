@@ -5,6 +5,7 @@ import { CartProvider } from "./contexts/CartContext";
 import { ToastProvider } from "./contexts/ToastContext";
 import Toast from "./components/Toast/Toast";
 import LoginPage from "./pages/LoginPage";
+import Registro from "./pages/Registro";
 import Dashboard from "./pages/Dashboard";
 import Store from "./pages/Store";
 import Cart from "./pages/Cart";
@@ -22,12 +23,56 @@ function App() {
             <Toast />
             <Routes>
               <Route path="/login" element={<LoginPage />} />
-              <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-              <Route path="/store" element={<ProtectedRoute><Store /></ProtectedRoute>} />
-              <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
-              <Route path="/pokemon/:name" element={<ProtectedRoute><PokemonDetail /></ProtectedRoute>} />
-              <Route path="/users" element={<ProtectedRoute><Users /></ProtectedRoute>} />
-              <Route path="/manage-products" element={<ProtectedRoute><ManageProducts /></ProtectedRoute>} />
+              <Route path="/register" element={<Registro />} />
+              <Route
+                path="/"
+                element={
+                  <ProtectedRoute>
+                    <Dashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/store"
+                element={
+                  <ProtectedRoute>
+                    <Store />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/cart"
+                element={
+                  <ProtectedRoute>
+                    <Cart />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/pokemon/:name"
+                element={
+                  <ProtectedRoute>
+                    <PokemonDetail />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/users"
+                element={
+                  <ProtectedRoute>
+                    <Users />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/manage-products"
+                element={
+                  <ProtectedRoute>
+                    <ManageProducts />
+                  </ProtectedRoute>
+                }
+              />
+              <Route path="*" element={<LoginPage />} />
             </Routes>
           </Router>
         </ToastProvider>

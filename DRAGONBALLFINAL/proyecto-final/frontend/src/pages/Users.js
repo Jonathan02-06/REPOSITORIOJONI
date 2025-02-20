@@ -1,75 +1,71 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../components/layout/Layout";
-import useLocalStorage from "../hooks/useLocalStorage";
 import "./Users.css";
 
 const Users = () => {
-  
-  const [users, setUsers] = useLocalStorage("users", []);
-  const [form, setForm] = useState({ id: null, name: "", email: "" });
-  const [isEditing, setIsEditing] = useState(false);
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (isEditing) {
-      setUsers(users.map(u => (u.id === form.id ? form : u)));
-      setIsEditing(false);
-    } else {
-      const newUser = { ...form, id: Date.now() };
-      setUsers([...users, newUser]);
+  // Función para obtener los usuarios del backend
+  const fetchUsers = async () => {
+    try {
+      const res = await fetch("http://localhost:5000/api/users");
+      const data = await res.json();
+      setUsers(data);
+    } catch (error) {
+      console.error("Error al obtener usuarios:", error);
+    } finally {
+      setLoading(false);
     }
-    setForm({ id: null, name: "", email: "" });
   };
 
-  const handleEdit = (user) => {
-    setForm(user);
-    setIsEditing(true);
-  };
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
-  const handleDelete = (id) => {
-    if (window.confirm("¿Estás seguro de eliminar este usuario?")) {
-      setUsers(users.filter(u => u.id !== id));
+  
+  const handleDelete = async (id) => {
+    if (window.confirm("¿Está seguro de eliminar este usuario?")) {
+      try {
+        const res = await fetch(`http://localhost:5000/api/users/${id}`, {
+          method: "DELETE",
+        });
+        const data = await res.json();
+        if (res.ok) {
+          alert(data.message);
+          fetchUsers(); 
+        } else {
+          alert(data.error);
+        }
+      } catch (error) {
+        console.error("Error al eliminar usuario:", error);
+        alert("Error en la conexión al servidor");
+      }
     }
   };
 
   return (
     <Layout>
-      <h2>Gestión de Usuarios</h2>
-      <form onSubmit={handleSubmit} className="user-form">
-        <input
-          type="text"
-          name="name"
-          placeholder="Nombre"
-          value={form.name}
-          onChange={handleInputChange}
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Correo"
-          value={form.email}
-          onChange={handleInputChange}
-          required
-        />
-        <button type="submit">{isEditing ? "Actualizar" : "Agregar"}</button>
-      </form>
-      <ul className="user-list">
-        {users.map(user => (
-          <li key={user.id} className="user-item">
-            <span>{user.name} ({user.email})</span>
-            <div>
-              <button onClick={() => handleEdit(user)}>Editar</button>
-              <button onClick={() => handleDelete(user.id)}>Eliminar</button>
-            </div>
-          </li>
-        ))}
-      </ul>
+      <div className="users-container">
+        <h2>Usuarios Registrados</h2>
+        {loading ? (
+          <p>Cargando usuarios...</p>
+        ) : (
+          <ul className="users-list">
+            {users.map((user) => (
+              <li key={user._id} className="user-item">
+                <p>
+                  <strong>Usuario:</strong> {user.username}
+                </p>
+                <p>
+                  <strong>Correo:</strong> {user.email}
+                </p>
+                <button onClick={() => handleDelete(user._id)}>Eliminar</button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </Layout>
   );
 };

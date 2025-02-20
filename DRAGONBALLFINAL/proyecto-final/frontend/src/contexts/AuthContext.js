@@ -1,3 +1,4 @@
+
 import React, { createContext, useReducer, useEffect } from "react";
 
 export const AuthContext = createContext();
@@ -16,9 +17,9 @@ const authReducer = (state, action) => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(authReducer, initialState, (initial) => {
+  const [state, dispatch] = useReducer(authReducer, initialState, () => {
     const storedUser = localStorage.getItem("user");
-    return storedUser ? { user: JSON.parse(storedUser) } : initial;
+    return storedUser ? { user: JSON.parse(storedUser) } : initialState;
   });
 
   useEffect(() => {
@@ -26,8 +27,11 @@ export const AuthProvider = ({ children }) => {
   }, [state.user]);
 
   const login = async ({ username, password }) => {
-    if (username === "Jonathan" && password === "1234") {
-      const userData = { username, token: "abcdef123456" };
+    
+    const normalizedUsername = username.toLowerCase();
+    
+    if (normalizedUsername === "jonathan" && password === "1234") {
+      const userData = { username: normalizedUsername, token: "dummy-token" };
       dispatch({ type: "LOGIN_SUCCESS", payload: userData });
       return { success: true };
     } else {

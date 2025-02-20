@@ -44,12 +44,8 @@ const Store = () => {
               <img src={product.image} alt={product.name} />
               <h3>{product.name}</h3>
               <p className="price">${product.price}</p>
-              <button onClick={() => handleAddToCart(product)}>
-                Añadir al Carrito
-              </button>
-              <button onClick={() => navigate(`/pokemon/${product.name}`)}>
-                Ver Detalle
-              </button>
+              <button onClick={() => handleAddToCart(product)}>Añadir al Carrito</button>
+              <button onClick={() => navigate(`/pokemon/${product.name}`)}>Ver Detalle</button>
             </div>
           ))}
         </div>

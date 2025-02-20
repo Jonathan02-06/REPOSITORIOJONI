@@ -26,8 +26,10 @@ export const ToastProvider = ({ children }) => {
   };
 
   return (
-    <ToastContext.Provider value={{ toast: state, showToast }}>
+    <ToastContext.Provider value={{ ...state, showToast }}>
       {children}
     </ToastContext.Provider>
   );
 };
+
+export default ToastContext;
